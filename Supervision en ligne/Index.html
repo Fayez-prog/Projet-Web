@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Supervision</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+    <!-- En-tête -->
+    <header class="bg-primary text-white text-center py-4">
+        <h1 class="display-4">Dashboard de Supervision</h1>
+        <p class="lead">Surveillance en temps réel des données de capteurs</p>
+    </header>
+
+    <!-- Menu de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Index.html">
+                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Index.html">
+                            <i class="fas fa-home me-2"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Statistiques.html">
+                            <i class="fas fa-chart-line me-2"></i>Statistiques
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Parametres.html">
+                            <i class="fas fa-cog me-2"></i>Paramètres
+                        </a>
+                    </li>
+                </ul>
+                <!-- Bouton de déconnexion -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Connexion.html" id="logout-link">
+                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="container mt-5">
+        <!-- Message de bienvenue -->
+        <div class="row mt-4 justify-content-center">
+            <div class="col-12 text-center">
+                <h3>Bienvenue, <span id="username-display">Admin</span> !</h3>
+            </div>
+        </div>
+
+        <!-- Boutons d'export, réinitialisation et thème -->
+        <div class="row mt-4 justify-content-center text-center">
+            <div class="col-12">
+                <button id="export-csv" class="btn btn-success me-2 mb-2">
+                    <i class="fas fa-file-csv me-2"></i>Exporter en CSV
+                </button>
+                <button id="export-json" class="btn btn-info me-2 mb-2">
+                    <i class="fas fa-file-code me-2"></i>Exporter en JSON
+                </button>
+                <button id="reset-data" class="btn btn-danger me-2 mb-2">
+                    <i class="fas fa-trash me-2"></i>Réinitialiser
+                </button>
+                <button id="toggle-theme" class="btn btn-secondary mb-2">
+                    <i class="fas fa-moon me-2"></i>Thème sombre
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtre par période -->
+        <div class="row mt-4 justify-content-center">
+            <div class="col-12 col-md-6">
+                <label for="timeFilter">Filtrer par période :</label>
+                <select id="timeFilter" class="form-select">
+                    <option value="10">10 secondes</option>
+                    <option value="30">30 secondes</option>
+                    <option value="60">1 minute</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Recherche -->
+        <div class="row mt-4 justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="input-group">
+                    <input type="text" id="search-input" class="form-control"
+                        placeholder="Rechercher par horodatage ou valeur">
+                    <button id="search-data" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartes pour les données -->
+        <div class="row mt-4 justify-content-center">
+            <div class="col-12 col-md-8">
+                <div class="row">
+                    <!-- Carte pour la température -->
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="card" data-toggle="tooltip" title="Température actuelle">
+                            <div class="card-header bg-primary text-white d-flex align-items-center">
+                                <i class="fas fa-thermometer-half me-2"></i> Température
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="temperature">--</h5>
+                                <p class="card-text">en °C</p>
+                            </div>
+                        </div>
+                        <!-- Alerte pour la température -->
+                        <div id="temperature-alert" class="alert alert-danger mt-3" style="display: none;">
+                            <span>Alerte : Température élevée</span>
+                            <button type="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Carte pour la pression -->
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="card" data-toggle="tooltip" title="Pression actuelle">
+                            <div class="card-header bg-success text-white d-flex align-items-center">
+                                <i class="fas fa-tachometer-alt me-2"></i> Pression
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="pressure">--</h5>
+                                <p class="card-text">en bar</p>
+                            </div>
+                        </div>
+                        <!-- Alerte pour la pression -->
+                        <div id="pressure-alert" class="alert alert-warning mt-3" style="display: none;">
+                            <span>Alerte : Pression élevée</span>
+                            <button type="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Carte pour la vibration -->
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="card" data-toggle="tooltip" title="Vibration actuelle">
+                            <div class="card-header bg-warning text-dark d-flex align-items-center">
+                                <i class="fas fa-vibration me-2"></i> Vibration
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="vibration">--</h5>
+                                <p class="card-text">en unités</p>
+                            </div>
+                        </div>
+                        <!-- Alerte pour la vibration -->
+                        <div id="vibration-alert" class="alert alert-info mt-3" style="display: none;">
+                            <span>Alerte : Vibration élevée</span>
+                            <button type="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphique en temps réel et statistiques -->
+        <div class="row mt-4 justify-content-center">
+            <!-- Graphique en temps réel -->
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Graphique en Temps Réel
+                    </div>
+                    <div class="card-body">
+                        <canvas id="sensorChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        Statistiques
+                    </div>
+                    <div class="card-body">
+                        <p>Température : Moyenne = <span id="avgTemperature">--</span>°C, Max = <span
+                                id="maxTemperature">--</span>°C</p>
+                        <p>Pression : Moyenne = <span id="avgPressure">--</span> bar, Max = <span
+                                id="maxPressure">--</span> bar</p>
+                        <p>Vibration : Moyenne = <span id="avgVibration">--</span>, Max = <span
+                                id="maxVibration">--</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicateur de chargement -->
+        <div id="loading" class="text-center mt-4" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Chargement...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p class="mb-0">&copy; 2023 Dashboard de Supervision. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="Script.js"></script>
+</body>
+
+</html>

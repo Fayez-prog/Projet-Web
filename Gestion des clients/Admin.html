@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Employés - Librairie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Librairie</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Clients.html"><i class="fas fa-users"></i> Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Livres.html"><i class="fas fa-book"></i> Livres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Panier.html"><i class="fas fa-shopping-cart"></i> Panier</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Historique.html"><i class="fas fa-history"></i> Historique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin.html"><i class="fas fa-user-cog"></i> Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>
+                            Déconnexion</a>
+                    </li>
+                </ul>
+                <form class="d-flex navbar-search">
+                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Gestion des Employés</h1>
+        <form id="employeeForm" class="mb-4">
+            <div class="mb-3">
+                <label for="employeeName" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="employeeName" required>
+            </div>
+            <div class="mb-3">
+                <label for="employeeUsername" class="form-label">Nom d'utilisateur</label>
+                <input type="text" class="form-control" id="employeeUsername" required>
+            </div>
+            <div class="mb-3">
+                <label for="employeePassword" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="employeePassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Créer un compte employé</button>
+        </form>
+
+        <h3>Liste des Employés</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTable">
+                <!-- Les employés seront ajoutés ici dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Script.js"></script>
+</body>
+
+</html>

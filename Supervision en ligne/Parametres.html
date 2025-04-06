@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+    <!-- En-tête -->
+    <header class="bg-primary text-white text-center py-4">
+        <h1 class="display-4">Paramètres</h1>
+        <p class="lead">Personnalisation des préférences</p>
+    </header>
+
+    <!-- Menu de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Index.html">
+                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Index.html">
+                            <i class="fas fa-home me-2"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Statistiques.html">
+                            <i class="fas fa-chart-line me-2"></i>Statistiques
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Parametres.html">
+                            <i class="fas fa-cog me-2"></i>Paramètres
+                        </a>
+                    </li>
+                </ul>
+                <!-- Bouton de déconnexion -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Connexion.html" id="logout-link">
+                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="container mt-5">
+        <h2>Paramètres</h2>
+        <p>Cette page permet de configurer les préférences de l'application.</p>
+
+        <!-- Formulaire de configuration des seuils -->
+        <div class="card mt-4">
+            <div class="card-header bg-secondary text-white">
+                Configuration des Seuils d'Alerte
+            </div>
+            <div class="card-body">
+                <form id="threshold-form">
+                    <div class="form-group mb-3">
+                        <label for="temperature-threshold">Seuil de Température (°C)</label>
+                        <input type="number" class="form-control" id="temperature-threshold" value="35" min="0" max="100" required>
+                        <div class="invalid-feedback">Veuillez entrer une valeur entre 0 et 100.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="pressure-threshold">Seuil de Pression (bar)</label>
+                        <input type="number" class="form-control" id="pressure-threshold" value="8" min="0" max="20" required>
+                        <div class="invalid-feedback">Veuillez entrer une valeur entre 0 et 20.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="vibration-threshold">Seuil de Vibration (unités)</label>
+                        <input type="number" class="form-control" id="vibration-threshold" value="80" min="0" max="200" required>
+                        <div class="invalid-feedback">Veuillez entrer une valeur entre 0 et 200.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p class="mb-0">&copy; 2023 Dashboard de Supervision. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Script.js"></script>
+</body>
+
+</html>
