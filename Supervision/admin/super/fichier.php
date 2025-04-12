@@ -1,0 +1,37 @@
+<?php
+include("../../fonctions.php");
+if(!verif_session_super_users()){
+header("location:../../super.php");
+}
+?>
+<html>
+<head>
+        <link href="../../css/assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/style.css">
+    </head>
+    <body>
+    <header id="header" class="header-transparent">
+    <div class="container">
+
+    <div id="logo" class="pull-left">
+        <a href="../../index.php">Accueil</a>
+      </div>
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><a href="ajoutentree.php">Ajouter Entr&eacute;es / Sorties Analogiques</a></li>
+          <li><a href="ajoutsortie.php">Ajouter Entr&eacute;es / Sorties Num&eacute;riques</a></li>
+          <li><a href="interface.php">Retour</a></li>
+          <li><a href="logout.php">D&eacute;connexion</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <br><br><br>
+    <section id="hero">
+ </section>
+        <script src="css/jquery-3.5.1.slim.min.js"></script>
+        <script src="css/popper.min.js"></script>
+        <script src="css/bootstrap.min.js"></script>
+    </body>
+</html>
